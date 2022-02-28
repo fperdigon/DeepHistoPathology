@@ -8,7 +8,6 @@
 #
 #============================================================
 
-
 from sklearn.metrics import confusion_matrix, accuracy_score, f1_score, precision_score, balanced_accuracy_score, \
     recall_score, classification_report, auc, roc_curve, roc_auc_score
 
@@ -19,55 +18,6 @@ from matplotlib.colors import LinearSegmentedColormap
 import itertools
 
 import numpy as np
-
-# def generate_k_fold_ROC_curve(list_test_set_GT, list_test_pred_keras):
-#     import matplotlib.pyplot as plt
-#     from sklearn.metrics import roc_curve, auc
-#     import numpy as np
-#     from scipy import interp
-#
-#     tprs = []
-#     aucs = []
-#     mean_fpr = np.linspace(0, 1, 100)
-#
-#     for i in range(len(list_test_set_GT)):
-#         # Compute ROC curve and area the curve
-#         fpr, tpr, thresholds = roc_curve(list_test_set_GT[i][:, 0],
-#                                          list_test_pred_keras[i][:, 0])
-#
-#         tprs.append(interp(mean_fpr, fpr, tpr))
-#         tprs[-1][0] = 0.0
-#         roc_auc = auc(fpr, tpr)
-#         aucs.append(roc_auc)
-#         plt.plot(fpr, tpr, lw=1, alpha=0.3,
-#                  label='ROC fold %d (AUC = %0.2f)' % (i, roc_auc))
-#
-#         i += 1
-#
-#     plt.plot([0, 1], [0, 1], linestyle='--', lw=2, color='r',
-#              label='Chance', alpha=.8)
-#
-#     mean_tpr = np.mean(tprs, axis=0)
-#     mean_tpr[-1] = 1.0
-#     mean_auc = auc(mean_fpr, mean_tpr)
-#     std_auc = np.std(aucs)
-#     plt.plot(mean_fpr, mean_tpr, color='b',
-#              label=r'Mean ROC (AUC = %0.2f $\pm$ %0.2f)' % (mean_auc, std_auc),
-#              lw=2, alpha=.8)
-#
-#     std_tpr = np.std(tprs, axis=0)
-#     tprs_upper = np.minimum(mean_tpr + std_tpr, 1)
-#     tprs_lower = np.maximum(mean_tpr - std_tpr, 0)
-#     plt.fill_between(mean_fpr, tprs_lower, tprs_upper, color='grey', alpha=.2,
-#                      label=r'$\pm$ 1 std. dev.')
-#
-#     plt.xlim([-0.05, 1.05])
-#     plt.ylim([-0.05, 1.05])
-#     plt.xlabel('False Positive Rate')
-#     plt.ylabel('True Positive Rate')
-#     plt.title('Receiver operating characteristic')
-#     plt.legend(loc="lower right")
-#     plt.show()
 
 
 def classification_metrics(y_test, y_pred):
@@ -229,19 +179,6 @@ def confusion_matrix_plot(y_test, y_pred, classes=None, custom_colors=False):
     print('')
 
 
-def confusion_matrix_normalized(y_test, y_pred):
-
-    from sklearn.metrics import confusion_matrix
-    import numpy as np
-
-    cm = confusion_matrix(y_test.argmax(axis=1), y_pred.argmax(axis=1))
-
-    # Generate a non normalized confusion matrix
-    cm_n = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-
-    return cm_n
-
-
 def confusion_matrix_plot_custom_cm(cm_n, classes=None):  # this version is for plotting one already generated CM
     import matplotlib.pyplot as plt
     import matplotlib
@@ -310,6 +247,7 @@ def confusion_matrix_plot_custom_cm(cm_n, classes=None):  # this version is for 
 
     print('')
 
+
 def generate_roc_plus_auc(y_test, y_pred_keras):
 
     print('Generating ROC courve ...')
@@ -349,57 +287,58 @@ def generate_roc_plus_auc(y_test, y_pred_keras):
     print('ROC courve done')
     print('')
 
-# def generate_k_fold_ROC_curve(list_test_set_GT, list_test_pred, toPNG=False, PNGName='ROC.png'):
-#     import matplotlib.pyplot as plt
-#     from sklearn.metrics import roc_curve, auc
-#     import numpy as np
-#     from scipy import interp
-#
-#     plt.figure()
-#
-#     tprs = []
-#     aucs = []
-#     mean_fpr = np.linspace(0, 1, 100)
-#
-#     for i in range(len(list_test_set_GT)):
-#         # Compute ROC curve and area the curve
-#         fpr, tpr, thresholds = roc_curve(list_test_set_GT[i][:, 0],
-#                                          list_test_pred[i][:, 0])
-#
-#         tprs.append(interp(mean_fpr, fpr, tpr))
-#         tprs[-1][0] = 0.0
-#         roc_auc = auc(fpr, tpr)
-#         aucs.append(roc_auc)
-#         plt.plot(fpr, tpr, lw=1, alpha=0.3,
-#                  label='ROC fold %d (AUC = %0.2f)' % (i, roc_auc))
-#
-#         i += 1
-#
-#     plt.plot([0, 1], [0, 1], linestyle='--', lw=2, color='r',
-#              label='Chance', alpha=.8)
-#
-#     mean_tpr = np.mean(tprs, axis=0)
-#     mean_tpr[-1] = 1.0
-#     mean_auc = auc(mean_fpr, mean_tpr)
-#     std_auc = np.std(aucs)
-#     plt.plot(mean_fpr, mean_tpr, color='b',
-#              label=r'Mean ROC (AUC = %0.2f $\pm$ %0.2f)' % (mean_auc, std_auc),
-#              lw=2, alpha=.8)
-#
-#     std_tpr = np.std(tprs, axis=0)
-#     tprs_upper = np.minimum(mean_tpr + std_tpr, 1)
-#     tprs_lower = np.maximum(mean_tpr - std_tpr, 0)
-#     plt.fill_between(mean_fpr, tprs_lower, tprs_upper, color='grey', alpha=.2,
-#                      label=r'$\pm$ 1 std. dev.')
-#
-#     plt.xlim([-0.05, 1.05])
-#     plt.ylim([-0.05, 1.05])
-#     plt.xlabel('False Positive Rate')
-#     plt.ylabel('True Positive Rate')
-#     plt.title('Receiver operating characteristic')
-#     plt.legend(loc="lower right")
-#
-#     if toPNG:
-#         plt.savefig(PNGName)
-#     else:
-#         plt.show()
+
+def generate_k_fold_ROC_curve(list_test_set_GT, list_test_pred, toPNG=False, PNGName='ROC.png'):
+    import matplotlib.pyplot as plt
+    from sklearn.metrics import roc_curve, auc
+    import numpy as np
+    from scipy import interp
+
+    plt.figure()
+
+    tprs = []
+    aucs = []
+    mean_fpr = np.linspace(0, 1, 100)
+
+    for i in range(len(list_test_set_GT)):
+        # Compute ROC curve and area the curve
+        fpr, tpr, thresholds = roc_curve(list_test_set_GT[i][:, 0],
+                                         list_test_pred[i][:, 0])
+
+        tprs.append(interp(mean_fpr, fpr, tpr))
+        tprs[-1][0] = 0.0
+        roc_auc = auc(fpr, tpr)
+        aucs.append(roc_auc)
+        plt.plot(fpr, tpr, lw=1, alpha=0.3,
+                 label='ROC fold %d (AUC = %0.2f)' % (i, roc_auc))
+
+        i += 1
+
+    plt.plot([0, 1], [0, 1], linestyle='--', lw=2, color='r',
+             label='Chance', alpha=.8)
+
+    mean_tpr = np.mean(tprs, axis=0)
+    mean_tpr[-1] = 1.0
+    mean_auc = auc(mean_fpr, mean_tpr)
+    std_auc = np.std(aucs)
+    plt.plot(mean_fpr, mean_tpr, color='b',
+             label=r'Mean ROC (AUC = %0.2f $\pm$ %0.2f)' % (mean_auc, std_auc),
+             lw=2, alpha=.8)
+
+    std_tpr = np.std(tprs, axis=0)
+    tprs_upper = np.minimum(mean_tpr + std_tpr, 1)
+    tprs_lower = np.maximum(mean_tpr - std_tpr, 0)
+    plt.fill_between(mean_fpr, tprs_lower, tprs_upper, color='grey', alpha=.2,
+                     label=r'$\pm$ 1 std. dev.')
+
+    plt.xlim([-0.05, 1.05])
+    plt.ylim([-0.05, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver operating characteristic')
+    plt.legend(loc="lower right")
+
+    if toPNG:
+        plt.savefig(PNGName)
+    else:
+        plt.show()
