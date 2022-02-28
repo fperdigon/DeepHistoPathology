@@ -5,7 +5,7 @@
 /run*/*
 Data_Preparation/__pycache__/*
 DeepHP/__pycache__/*
-utils/__pycache__/*
+Utils/__pycache__/*
 /data/*
 
 # Files to ignore
