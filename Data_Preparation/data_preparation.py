@@ -13,6 +13,10 @@ import urllib.request
 import os
 import zipfile
 
+url = 'http://andrewjanowczyk.com/wp-static/IDC_regular_ps50_idx5.zip'
+name = 'IDC_regular_ps50_idx5.zip'
+uzip_folder = 'IDC_Dataset'
+
 def load_img_path(data_path, folders_list):
     X_data_list = []
     y_data_list = []
@@ -39,9 +43,9 @@ def load_img_path(data_path, folders_list):
 
 
 def prepare_IDC_Data(data_folder, data_split=None, extract_anyways=False):
-    url = 'http://andrewjanowczyk.com/wp-static/IDC_regular_ps50_idx5.zip'
-    name = 'IDC_regular_ps50_idx5.zip'
-    uzip_folder = 'IDC_Dataset'
+    global url
+    global name
+    global uzip_folder
 
     # Download the data
     if not os.path.exists(data_folder + '/' + name):
