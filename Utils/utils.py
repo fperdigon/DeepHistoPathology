@@ -110,6 +110,9 @@ def hps_image_reconst_from_patches(dir, DataSet_path):
 
 
 def save_reconst_hps_to_png(img, save_folder, hps_slide):
+    if not os.path.exists(save_folder):
+        os.mkdir(save_folder)
+
     # Plot the reconstructed image
     plt.figure()
     plt.imshow(img)
@@ -118,9 +121,35 @@ def save_reconst_hps_to_png(img, save_folder, hps_slide):
     fig1 = plt.gcf()
     plt.show(block=False)
     fig1.savefig(save_folder + '/' + hps_slide + '_hps.png', dpi=300, bbox_inches='tight', pad_inches=0)
-
     plt.close()
 
+    return save_folder + '/' + hps_slide + '_hps.png'
+
+
+def load_img_generate_patch_array(imp_path, patch_size=(50, 50)):
+
+    im_data = load_img(imp_path, grayscale=False)  # Import Images in keras way
+    im_data = img_to_array(im_data)  # Import Images in keras way
+    im_data = im_data.astype(dtype=np.uint8)
+
+    patch_per_row = int(im_data.shape[0] / patch_size[0])
+    patch_per_column = int(im_data.shape[1] / patch_size[1])
+
+    patches_array = []
+    for i in range(patch_per_row):
+        for j in range(patch_per_column):
+            x = i * patch_size[0]
+            dx = x + patch_size[0]
+            y = j * patch_size[1]
+            dy = y + patch_size[1]
+            patches_array.append(im_data[x:dx, y:dy, :])
+
+    patches_array = np.asarray(patches_array)
+    out = {'patch_size': patch_size,
+           'patch_per_row': patch_per_row,
+           'patch_per_column': patch_per_column,
+           'patches_array': patches_array}
+    return out
 
 # def save_HeatMap(heatMap, name_img = "heatmap.png"):
 #     """
