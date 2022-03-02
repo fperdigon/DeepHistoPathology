@@ -151,6 +151,28 @@ def load_img_generate_patch_array(imp_path, patch_size=(50, 50)):
            'patches_array': patches_array}
     return out
 
+def heatmap_img_from_predictions(org_img, predictions, patch_size, patch_per_row, patch_per_column):
+    ccp_img_shape = np.reshape(predictions, (patch_per_row, patch_per_column))
+
+    heat_map = np.zeros(shape=(org_img.shape[0], org_img.shape[1]), dtype=np.float16)
+
+    for i in range(patch_per_row):
+        for j in range(patch_per_column):
+            x = i * patch_size[0]
+            dx = x + patch_size[0]
+            y = j * patch_size[1]
+            dy = y + patch_size[1]
+            heat_map[x:dx, y:dy] = ccp_img_shape[i, j]
+
+            if org_img[x:dx, y:dy, :].mean() == 240:
+                heat_map[x:dx, y:dy] = 0
+
+    hm = heat_map * 255
+    hm = np.array(hm, dtype=np.float)
+
+    return hm
+
+
 # def save_HeatMap(heatMap, name_img = "heatmap.png"):
 #     """
 #     Save heatMap
