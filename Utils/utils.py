@@ -148,7 +148,8 @@ def load_img_generate_patch_array(imp_path, patch_size=(50, 50)):
     out = {'patch_size': patch_size,
            'patch_per_row': patch_per_row,
            'patch_per_column': patch_per_column,
-           'patches_array': patches_array}
+           'patches_array': patches_array,
+           'org_hps': im_data}
     return out
 
 def heatmap_img_from_predictions(org_img, predictions, patch_size, patch_per_row, patch_per_column):
