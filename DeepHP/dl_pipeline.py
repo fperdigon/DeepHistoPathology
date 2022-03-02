@@ -277,3 +277,35 @@ def test_dl(Dataset):
         pickle.dump([test_set_GT, test_pred_keras], output)
 
     K.clear_session()
+
+
+def inference_dl(inference_set):
+
+    batch_size = 32
+
+    # ==================
+    # LOAD THE DL MODEL
+    # ==================
+    # model = dl_models.deepHP_model_BC_V0_DW_V0()
+    # model = dl_models.deepHP_model_BC_V0_DW_V1()
+    # model = dl_models.deepHP_model_BC_V0_inception()
+    model = dl_models.deepHP_model_BC_V0_1_inception()  # BEST RESULTS
+    # model = dl_models.deepHP_model_BC_V0_inception_non_bn()
+    # model = dl_models.deepHP_model_BC_V0_inception_NO_FC()
+    # model = dl_models.deepHP_model_BC_V1_inception()
+    # model = dl_models.deepHP_model_BC_v1_DP_inception()
+
+    model.compile(loss=keras.losses.categorical_crossentropy,
+                  optimizer=keras.optimizers.Adam(lr=0.1),
+                  metrics=['accuracy'])
+
+    # checkpoint
+    model_filepath = "weights.best.hdf5"
+    # load weights
+    model.load_weights(model_filepath)
+
+    pred_keras = model.predict(inference_set, batch_size=batch_size, verbose=1)
+
+    K.clear_session()
+
+    return pred_keras
