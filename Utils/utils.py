@@ -9,6 +9,9 @@
 #
 #===========================================================
 
+import os
+from keras.preprocessing.image import load_img, img_to_array
+import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -33,6 +36,79 @@ def get_model_memory_usage(batch_size, model):
     total_memory = 4.0*batch_size*(shapes_mem_count + trainable_count + non_trainable_count)
     gbytes = np.round(total_memory / (1024.0 ** 3), 3)
     return gbytes
+
+
+def hps_image_reconst_from_patches(dir, DataSet_path):
+
+        ### load all patches path ###
+
+        negative_patches_file_list = []
+        positive_patches_file_list = []
+        for file in os.listdir(DataSet_path + dir + '/0'):
+            tmp_img_path = DataSet_path + dir + '/0/' + file
+            if os.path.isfile(tmp_img_path):
+                negative_patches_file_list.append(tmp_img_path)
+
+        for file in os.listdir(DataSet_path + dir + '/1'):
+            tmp_img_path = DataSet_path + dir + '/1/' + file
+            if os.path.isfile(tmp_img_path):
+                positive_patches_file_list.append(tmp_img_path)
+
+        patches = negative_patches_file_list + positive_patches_file_list
+
+        ### find the maximum size ###
+
+        x_size = 0
+        y_size = 0
+
+        patch_size = (50, 50)
+
+        for p in patches:
+            x_val = p.split('/')[-1].split('_')[2].split('x')[1]
+            x_val = int(x_val)
+
+            y_val = p.split('/')[-1].split('_')[3].split('y')[1]
+            y_val = int(y_val)
+
+            if x_size < x_val:
+                x_size = x_val
+            if y_size < y_val:
+                y_size = y_val
+
+        x_size = x_size + 50
+        y_size = y_size + 50
+
+        img_big = np.zeros((y_size, x_size, 3), dtype=np.uint8)
+        img_big = img_big + 240
+
+        class_patches = np.zeros((y_size, x_size, 3), dtype=np.uint8)
+
+        for p in patches:
+            x_val = p.split('/')[-1].split('_')[2].split('x')[1]
+            x_val = int(x_val)
+
+            y_val = p.split('/')[-1].split('_')[3].split('y')[1]
+            y_val = int(y_val)
+
+            img = load_img(p, grayscale=False)  # Import Images in keras way
+            img = img_to_array(img)  # Import Images in keras way
+            img = img.astype(dtype=np.uint8)
+            # plt.imshow(img)
+            # plt.show()
+            im_dim0 = img.shape[1]
+            im_dim1 = img.shape[0]
+
+            dx = x_val + im_dim0
+            dy = y_val + im_dim1
+
+            img_big[y_val:dy, x_val:dx, :] = img
+
+            if p in positive_patches_file_list:
+                class_patches[y_val:dy, x_val:dx, :] = 255
+
+        return [img_big, class_patches]
+
+
 
 
 # def save_HeatMap(heatMap, name_img = "heatmap.png"):
