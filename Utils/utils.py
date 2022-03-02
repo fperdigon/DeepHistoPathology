@@ -109,6 +109,17 @@ def hps_image_reconst_from_patches(dir, DataSet_path):
         return [img_big, class_patches]
 
 
+def save_reconst_hps_to_png(img, save_folder, hps_slide):
+    # Plot the reconstructed image
+    plt.figure()
+    plt.imshow(img)
+    plt.axis('off')
+    plt.tight_layout()
+    fig1 = plt.gcf()
+    plt.show(block=False)
+    fig1.savefig(save_folder + '/' + hps_slide + '_hps.png', dpi=300, bbox_inches='tight', pad_inches=0)
+
+    plt.close()
 
 
 # def save_HeatMap(heatMap, name_img = "heatmap.png"):
