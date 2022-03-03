@@ -76,7 +76,7 @@ def normalize_rgb(img, std=True):
 def load_img_from_path(img_path):
     """
     Load an image, fix the issue with images smaller than 50x50
-    :param img_path: impage path
+    :param img_path: image path
     :return: image in numpy format
     """
     img_patch = np.zeros((50, 50, 3), dtype=np.uint8)
@@ -86,7 +86,7 @@ def load_img_from_path(img_path):
     im_dim0 = img.shape[0]
     im_dim1 = img.shape[1]
     img_patch[0:im_dim0, 0:im_dim1, :] = img
-    img_patch = normalize_rgb(img_patch)
+    # img_patch = normalize_rgb(img_patch)
     return img_patch
 
 
@@ -267,6 +267,12 @@ def test_dl(Dataset):
     model.load_weights(model_filepath)
 
     test_pred_keras = model.predict(test_set, batch_size=batch_size, verbose=1)
+
+    cc = test_pred_keras[:, 1]
+    ncc = test_pred_keras[:, 0]
+
+    print('DB')
+
     global experiment_label
     # Pickle the values
     import _pickle as pickle
@@ -279,9 +285,9 @@ def test_dl(Dataset):
     K.clear_session()
 
 
-def inference_dl(inference_set):
+def inference_dl(inference_set, model_filepath="weights.best.hdf5"):
 
-    batch_size = 32
+    batch_size = 8
 
     # ==================
     # LOAD THE DL MODEL
@@ -300,7 +306,7 @@ def inference_dl(inference_set):
                   metrics=['accuracy'])
 
     # checkpoint
-    model_filepath = "weights.best.hdf5"
+
     # load weights
     model.load_weights(model_filepath)
 
