@@ -179,24 +179,6 @@ def heatmap_img_from_predictions(org_img, predictions, patch_size, patch_per_row
     return heat_map
 
 
-# def save_HeatMap(heatMap, name_img = "heatmap.png"):
-#     """
-#     Save heatMap
-#
-#     :param Image_list:
-#     :return:
-#     """
-#
-#     print("Saving images heatmap (" + name_img + ")")
-#
-#     ## TODO: Use matplotlib for this
-#     img = denormalize2uint8(heatMap * (-1)) # To make the positive in red and negative in blue
-#     image_cm = cv2.applyColorMap(np.array(img, dtype=np.uint8), cv2.COLORMAP_JET)
-#     img_out = array_to_img(image_cm)#, data_format='channels_first')
-#     img_out.save(name_img)
-
-
-
 
 
 
