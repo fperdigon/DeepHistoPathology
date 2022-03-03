@@ -44,13 +44,13 @@ def hps_image_reconst_from_patches(dir, DataSet_path):
 
         negative_patches_file_list = []
         positive_patches_file_list = []
-        for file in os.listdir(DataSet_path + dir + '/0'):
-            tmp_img_path = DataSet_path + dir + '/0/' + file
+        for file in os.listdir(DataSet_path + '/' + dir + '/0'):
+            tmp_img_path = DataSet_path + '/' + dir + '/0/' + file
             if os.path.isfile(tmp_img_path):
                 negative_patches_file_list.append(tmp_img_path)
 
-        for file in os.listdir(DataSet_path + dir + '/1'):
-            tmp_img_path = DataSet_path + dir + '/1/' + file
+        for file in os.listdir(DataSet_path + '/' + dir + '/1'):
+            tmp_img_path = DataSet_path + '/' + dir + '/1/' + file
             if os.path.isfile(tmp_img_path):
                 positive_patches_file_list.append(tmp_img_path)
 
@@ -168,10 +168,15 @@ def heatmap_img_from_predictions(org_img, predictions, patch_size, patch_per_row
             if org_img[x:dx, y:dy, :].mean() == 240:
                 heat_map[x:dx, y:dy] = 0
 
-    hm = heat_map * 255
-    hm = np.array(hm, dtype=np.float)
+    # 0 - 1 Normalization
+    heat_map = heat_map - np.min(heat_map)
+    heat_map = heat_map / np.max(heat_map)
 
-    return hm
+    # 0 - 255 normalization and int 8 conversion, required by the filters
+    heat_map = heat_map * 255.0
+    heat_map = np.array(heat_map, dtype=np.uint8)
+
+    return heat_map
 
 
 # def save_HeatMap(heatMap, name_img = "heatmap.png"):
