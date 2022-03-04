@@ -17,6 +17,7 @@ import Data_Preparation.data_preparation as data_preparation
 import DeepHP.dl_pipeline as dl_pipeline
 import Utils.metrics as metrics
 
+dl_pipeline.experiment_label = 'paper_model_no_rgm_norm'
 
 if __name__ == "__main__":
     data_folder = './data'
@@ -26,7 +27,7 @@ if __name__ == "__main__":
     data_split = [train_list_file, val_list_file, test_list_file]
 
     Dataset_paths = data_preparation.prepare_IDC_Data(data_folder, data_split=data_split)
-    Dataset_np = dl_pipeline.dataset_np(Dataset_paths)
+    Dataset_np = dl_pipeline.dataset_np(Dataset_paths, rgb_norm=False)
 
     dl_pipeline.train_dl(Dataset_np)
     dl_pipeline.test_dl(Dataset_np)
