@@ -1,8 +1,8 @@
 # Deep Histo-Pathology
 
 For a more theoretical information please visit our conference paper at **2019 IEEE 16th International Symposium 
-on Biomedical Imaging (ISBI 2019)**
-:[https://ieeexplore.ieee.org/abstract/document/8759410](https://ieeexplore.ieee.org/abstract/document/8759410 "paper")  
+on Biomedical Imaging (ISBI 2019)**: 
+[https://ieeexplore.ieee.org/abstract/document/8759410](https://ieeexplore.ieee.org/abstract/document/8759410 "paper")  
 
 This repository contains the codes for reproducing the results obtained by out DeepHistoPathology model using an 
 Ivasive Ductal Carcinoma open Dataset.
