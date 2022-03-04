@@ -73,7 +73,7 @@ def normalize_rgb(img, std=True):
     return img
 
 
-def load_img_from_path(img_path):
+def load_img_from_path(img_path, rgb_norm=False):
     """
     Load an image, fix the issue with images smaller than 50x50
     :param img_path: image path
@@ -86,11 +86,12 @@ def load_img_from_path(img_path):
     im_dim0 = img.shape[0]
     im_dim1 = img.shape[1]
     img_patch[0:im_dim0, 0:im_dim1, :] = img
-    # img_patch = normalize_rgb(img_patch)
+    if rgb_norm:
+        img_patch = normalize_rgb(img_patch)
     return img_patch
 
 
-def dataset_np(Dataset_paths):
+def dataset_np(Dataset_paths, rgb_norm=False):
     """
     Generates Dataset in np format
     :param Dataset_paths: datasets paths for each set
@@ -104,7 +105,7 @@ def dataset_np(Dataset_paths):
 
     X_train = []
     for img_path in X_train_list:
-        img_tmp = load_img_from_path(img_path)
+        img_tmp = load_img_from_path(img_path, rgb_norm)
         X_train.append(img_tmp)
 
     X_train = np.array(X_train)
@@ -112,7 +113,7 @@ def dataset_np(Dataset_paths):
 
     X_val = []
     for img_path in X_val_list:
-        img_tmp = load_img_from_path(img_path)
+        img_tmp = load_img_from_path(img_path, rgb_norm)
         X_val.append(img_tmp)
 
     X_val = np.array(X_val)
@@ -120,7 +121,7 @@ def dataset_np(Dataset_paths):
 
     X_test = []
     for img_path in X_test_list:
-        img_tmp = load_img_from_path(img_path)
+        img_tmp = load_img_from_path(img_path, rgb_norm)
         X_test.append(img_tmp)
 
     X_test = np.array(X_test)
