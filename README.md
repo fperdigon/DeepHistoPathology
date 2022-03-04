@@ -44,18 +44,20 @@ We used the open IDC dataset in which we obtained a balanced accuracy of 0.89 an
 recent state of the art classification algorithms tested on this public dataset
 
 The following figure shows the used Inception modeules that incorporates Batch normalization. 
-![Inception module](_README_IMGS/Inception_module.png | width=200px)
+<img src="https://github.com/fperdigon/DeepHistoPathology/raw/master/_README_IMGS/Inception_module.png" width=50% height=50%>
+
 
 The following table shows the overall model architecture.
-![Model Architecture](_README_IMGS/Arch_table.png | width=200px)
 
+<img src="https://github.com/fperdigon/DeepHistoPathology/raw/master/_README_IMGS/Arch_table.png" width=50% height=50%>
 
 ## Results
 
 The following table present the quantitative results of DeepHP Net compared on the same test set with other SOTA 
 methods.
 
-![Results table](_README_IMGS/Results_table.png "Results table")
+<img src="https://github.com/fperdigon/DeepHistoPathology/raw/master/_README_IMGS/Results_table.png" width=40% height=40%>
+
 
 Qualitative results
 
