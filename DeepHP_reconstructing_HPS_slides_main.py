@@ -30,8 +30,6 @@ if __name__ == "__main__":
     val_list_file = './Data_Preparation/cases_val.txt'
     test_list_file = './Data_Preparation/cases_test.txt'
 
-    # TODO: Add Dataset download dataset function
-
     # Reading hps from test to generate images
     test_list = []
     with open(test_list_file) as fp:
@@ -49,12 +47,14 @@ if __name__ == "__main__":
         # Determines if the hps folder exists
         if os.path.exists(df + '/' + hps):
             # determine if the image was previously reconstructed
-            if not os.path.exists(recons_folder + '/' + hps + '_hps.png'):
+            if not os.path.exists(data_folder + '/' + recons_folder + '/' + hps + '_hps.png'):
                 [img_big, class_patches] = utils.hps_image_reconst_from_patches(hps, df)
-                hps_path = utils.save_reconst_hps_to_png(img=img_big, hps_slide=hps, save_folder=recons_folder)
+                hps_path = utils.save_reconst_hps_to_png(img=img_big,
+                                                         hps_slide=hps,
+                                                         save_folder=data_folder + '/' + recons_folder)
                 hps_path_list.append(hps_path)
             else:
-                hps_path_list.append(recons_folder + '/' + hps + '_hps.png')
+                hps_path_list.append(data_folder + '/' + recons_folder + '/' + hps + '_hps.png')
         else:
             print(hps + ' folder does not exist')
         pbar.update(1)
@@ -92,7 +92,7 @@ if __name__ == "__main__":
             heatmap = grey_dilation(heatmap, footprint=np.ones((3, 3)))
 
         # Apply a Gaussian filter to smooth the heatmap
-        heatmap = gaussian_filter(heatmap, sigma=10)
+        heatmap = gaussian_filter(heatmap, sigma=25)
 
         # Generating images
         def transparent_cmap(cmap, alpha_th=70, N=255):
@@ -135,7 +135,7 @@ if __name__ == "__main__":
         cbar = f.colorbar(matplotlib.cm.ScalarMappable(norm=norm, cmap='jet'),
                           ax=a2, pad=.05, extend='neither', fraction=1)
         for t in cbar.ax.get_yticklabels():
-            t.set_fontsize(7)
+            t.set_fontsize(5)
         a2.axis('off')
 
         fig1 = plt.gcf()
