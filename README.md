@@ -5,16 +5,17 @@ on Biomedical Imaging (ISBI 2019)**
 :[https://ieeexplore.ieee.org/abstract/document/8759410](https://ieeexplore.ieee.org/abstract/document/8759410 "paper")  
 
 This repository contains the codes for reproducing the results obtained by out DeepHistoPathology model using an 
-Ivasive Ductal Carcinoma open Dataset
+Ivasive Ductal Carcinoma open Dataset.
 
 The deep learning models were implemented using Keras/Tensorflow framework.
+
 The preprint for this work is availabe at https://arxiv.org/pdf/1901.03684.pdf
 
 - [Introduction](#introduction) 
 - [Results](#results)
 - [Installation](#installation)
 - [References](#references)
-- [How to cite DeepFilter](#citing-deepfilter)
+- [How to cite DeepHP](#citing-deephp)
 - [License](#license)
 
 # Introduction
@@ -59,9 +60,10 @@ methods.
 
 Qualitative results
 
-The figure shows a portion of sele0106 ECG signal.
-![Original ECG signal](ReadmeImg/fig_sele0106_orig.png "Original ECG signal")
+The figure shows two HPS images. on the right the overlapped hearmap shows the IDC cell probability.
+![HPS image 1](_README_IMGS/9254_hps.png_predictions.jpg "HPS image 1")
 
+![HPS image 2](_README_IMGS/9261_hps.png_predictions.jpg "HPS image 2")
 
 ## Reproducibility
   
@@ -100,6 +102,12 @@ This python script will:
 - Train the model 
 - Calculate performance metrics and display them in the console
 - Generate confusion Matrix and ROC curve figures
+
+Once the model is trained, for generating images with heatmaps run the following command:
+
+~~~
+python DeepHP_reconstructing_HPS_slides_main.py
+~~~
 
 If you have a Nvidia CUDA capable device for GPU acceleration this code will automatically use it (faster). Otherwise the 
 training will be done in CPU (slower).   
