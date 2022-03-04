@@ -9,7 +9,7 @@ Ivasive Ductal Carcinoma open Dataset.
 
 The deep learning models were implemented using Keras/Tensorflow framework.
 
-The preprint for this work is availabe at https://arxiv.org/pdf/1901.03684.pdf
+The preprint for this work is available at https://arxiv.org/pdf/1901.03684.pdf
 
 - [Introduction](#introduction) 
 - [Results](#results)
@@ -22,7 +22,7 @@ The preprint for this work is availabe at https://arxiv.org/pdf/1901.03684.pdf
 
 Breast cancer is the most diagnosed cancer and the most predominant cause of death in women worldwide. 
 Imaging techniques such as the breast cancer pathology helps in the diagnosis and monitoring of the disease. 
-However identification of malignant cells can be challenging given the high heterogeneity in tissue absorbotion from 
+However, identification of malignant cells can be challenging given the high heterogeneity in tissue absorbotion from 
 staining agents. In this work, we present a novel approach for Invasive Ductal Carcinoma (IDC) cells discrimination in 
 histopathology slides.
 
@@ -43,7 +43,7 @@ each convolutional steps. This module was used as a base block for the feature e
 We used the open IDC dataset in which we obtained a balanced accuracy of 0.89 and an F1 score of 0.90, thus surpassing
 recent state of the art classification algorithms tested on this public dataset
 
-The following figure shows the used Inception modeules that incorporates Batch normalization.
+The following figure shows the used Inception modules that incorporates Batch normalization.
 
 <img src="https://github.com/fperdigon/DeepHistoPathology/raw/master/_README_IMGS/Inception_module.png" width=50% height=50%>
 
@@ -54,7 +54,7 @@ The following table shows the overall model architecture.
 
 ## Results
 
-The following table present the quantitative results of DeepHP Net compared on the same test set with other SOTA 
+The following table presents the quantitative results of DeepHP Net compared on the same test set with other SOTA 
 methods.
 
 <img src="https://github.com/fperdigon/DeepHistoPathology/raw/master/_README_IMGS/Results_table.png" width=40% height=40%>
@@ -71,7 +71,7 @@ The figure shows two HPS images. on the right the overlapped hearmap shows the I
 ## Reproducibility
   
 ### Download this git repository and run local
-The firts step is to clone this repository
+The firsts step is to clone this repository
  
 ~~~
 git clone https://github.com/fperdigon/DeepHistoPathology
