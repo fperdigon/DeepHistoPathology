@@ -44,11 +44,10 @@ We used the open IDC dataset in which we obtained a balanced accuracy of 0.89 an
 recent state of the art classification algorithms tested on this public dataset
 
 The following figure shows the used Inception modeules that incorporates Batch normalization. 
-![Inception module](_README_IMGS/Inception_module.png "Inception module")
+![Inception module](_README_IMGS/Inception_module.png | width=200px)
 
 The following table shows the overall model architecture.
-![Model Architecture](_README_IMGS/Arch_table.png "Model Architecture")
-
+![Model Architecture](_README_IMGS/Arch_table.png | width=200px)
 
 
 ## Results
