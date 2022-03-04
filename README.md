@@ -43,7 +43,8 @@ each convolutional steps. This module was used as a base block for the feature e
 We used the open IDC dataset in which we obtained a balanced accuracy of 0.89 and an F1 score of 0.90, thus surpassing
 recent state of the art classification algorithms tested on this public dataset
 
-The following figure shows the used Inception modeules that incorporates Batch normalization. 
+The following figure shows the used Inception modeules that incorporates Batch normalization.
+
 <img src="https://github.com/fperdigon/DeepHistoPathology/raw/master/_README_IMGS/Inception_module.png" width=50% height=50%>
 
 
@@ -62,6 +63,7 @@ methods.
 Qualitative results
 
 The figure shows two HPS images. on the right the overlapped hearmap shows the IDC cell probability.
+
 ![HPS image 1](_README_IMGS/9254_hps.png_predictions.jpg "HPS image 1")
 
 ![HPS image 2](_README_IMGS/9261_hps.png_predictions.jpg "HPS image 2")
