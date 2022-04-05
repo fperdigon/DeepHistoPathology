@@ -50,6 +50,8 @@ def prepare_IDC_Data(data_folder, data_split=None, extract_anyways=False):
     # Download the data
     if not os.path.exists(data_folder + '/' + name):
         print('Downloading data ...')
+        if not os.path.exists(data_folder):
+            os.mkdir(data_folder)
         urllib.request.urlretrieve(url, data_folder + '/' + name)
         print('Data downloaded ...')
     else:
