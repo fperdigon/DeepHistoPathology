@@ -12,8 +12,10 @@
 import urllib.request
 import os
 import zipfile
+import gdown
 
-url = 'http://andrewjanowczyk.com/wp-static/IDC_regular_ps50_idx5.zip'
+# Google Drive link
+url = 'https://drive.google.com/uc?id=1UAx1CofOvNkHq8WYdU2sOX5xbgcLGZ1g'
 name = 'IDC_regular_ps50_idx5.zip'
 uzip_folder = 'IDC_Dataset'
 
@@ -52,7 +54,7 @@ def prepare_IDC_Data(data_folder, data_split=None, extract_anyways=False):
         print('Downloading data ...')
         if not os.path.exists(data_folder):
             os.mkdir(data_folder)
-        urllib.request.urlretrieve(url, data_folder + '/' + name)
+        gdown.download(url, data_folder + '/' + name, quiet=False)
         print('Data downloaded ...')
     else:
         print('Data downloaded already ...')
