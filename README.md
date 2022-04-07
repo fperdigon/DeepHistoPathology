@@ -84,7 +84,7 @@ packages.
 
 To create the conda environment run the following command:
 ~~~
-conda env create -f environment.yaml
+conda env create -f environment.yml
 ~~~
 
 Then activate the Python environment you just created with the following command:
